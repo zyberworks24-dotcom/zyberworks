@@ -8,7 +8,7 @@ export default function App() {
       <header className="fixed top-0 left-0 w-full z-50 bg-slate-950/80 backdrop-blur-lg border-b border-slate-800 shadow-lg">
         <div className="max-w-7xl mx-auto flex justify-between items-center px-8 py-4">
           <img
-            src="Imgaes/logo-horizontal-transparent.png"
+            src="Imgaes/icon-transparent.png"
             alt="Zyberworks logo"
             className="w-44 md:w-52 drop-shadow-[0_6px_20px_rgba(34,211,238,0.35)]"
           />
