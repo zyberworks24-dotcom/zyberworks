@@ -20,22 +20,43 @@ export default function App() {
       </header>
 
       {/* ---------- Hero ---------- */}
-      <section className="relative h-screen flex flex-col items-center justify-center overflow-hidden pt-32">
-        <motion.div className="absolute h-[36rem] w-[36rem] rounded-full blur-3xl bg-cyan-400/20 -left-32 -top-24"
-          animate={{ y: [0, 30, 0] }} transition={{ repeat: Infinity, duration: 8, ease: "easeInOut" }} />
-        <motion.div className="absolute h-[44rem] w-[44rem] rounded-full blur-3xl bg-indigo-500/10 -right-40 bottom-[-6rem]"
-          animate={{ y: [0, -30, 0] }} transition={{ repeat: Infinity, duration: 9, ease: "easeInOut" }} />
-        <motion.img src="icon-transparent.png" alt="Zyberworks logo"
-          className="w-44 md:w-56 mb-8 drop-shadow-[0_6px_20px_rgba(34,211,238,0.45)]"
-          animate={{ opacity: [0.3, 1, 0.3] }} transition={{ repeat: Infinity, duration: 5, ease: "easeInOut" }} />
-        <motion.div initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 1 }} className="text-center px-6 mt-4">
-          <h1 className="text-5xl md:text-7xl font-extrabold tracking-tight mb-4">IT Services & Security Consulting</h1>
-          <p className="text-lg text-slate-300 max-w-2xl mx-auto">
-            Secure by design. Pragmatic delivery across ISO 27001, NIST CSF 2.0, and the ASD Essential Eight.
-          </p>
-        </motion.div>
-      </section>
+<section className="relative h-screen flex flex-col items-center justify-center overflow-hidden pt-32">
+  <motion.div
+    className="absolute h-[36rem] w-[36rem] rounded-full blur-3xl bg-cyan-400/20 -left-32 -top-24"
+    animate={{ y: [0, 30, 0] }}
+    transition={{ repeat: Infinity, duration: 8, ease: "easeInOut" }}
+  />
+
+  <motion.div
+    className="absolute h-[44rem] w-[44rem] rounded-full blur-3xl bg-indigo-500/10 -right-40 bottom-[-6rem]"
+    animate={{ y: [0, -30, 0] }}
+    transition={{ repeat: Infinity, duration: 9, ease: "easeInOut" }}
+  />
+
+  {/* ✅ Updated logo reference */}
+  <motion.img
+    src="/icon-transparent.png"
+    alt="Zyberworks logo"
+    className="w-44 md:w-56 mb-8 drop-shadow-[0_6px_20px_rgba(34,211,238,0.45)]"
+    animate={{ opacity: [0.3, 1, 0.3] }}
+    transition={{ repeat: Infinity, duration: 5, ease: "easeInOut" }}
+  />
+
+  <motion.div
+    initial={{ opacity: 0, y: 30 }}
+    animate={{ opacity: 1, y: 0 }}
+    transition={{ duration: 1 }}
+    className="text-center px-6 mt-4"
+  >
+    <h1 className="text-5xl md:text-7xl font-extrabold tracking-tight mb-4">
+      IT Services & Security Consulting
+    </h1>
+    <p className="text-lg text-slate-300 max-w-2xl mx-auto">
+      Secure by design. Pragmatic delivery across ISO 27001, NIST CSF 2.0, and the ASD Essential Eight.
+    </p>
+  </motion.div>
+</section>
+
 
       {/* ---------- Services (Collapsible) ---------- */}
 <section id="services" className="relative max-w-6xl mx-auto px-6 py-16 border-t border-slate-800">
