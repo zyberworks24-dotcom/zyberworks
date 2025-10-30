@@ -212,13 +212,55 @@ function CollapsibleService({ kicker, title, body, tint, cards }) {
 }
 
 /* ---------- Contact CTA & Footer ---------- */
+/* ---------- Contact CTA & Footer ---------- */
 function ContactCTA() {
   const [showForm, setShowForm] = useState(false);
-  const [form, setForm] = useState({ name: "", email: "", company: "", message: "" });
+
+  // Add service to the form state
+  const [form, setForm] = useState({
+    name: "",
+    email: "",
+    company: "",
+    service: "",
+    message: "",
+  });
+
+  // All services from your Services section
+  const services = [
+    "Penetration Testing",
+    "ISO 27001 & NIST CSF 2.0",
+    "ASD Essential Eight",
+    "IT Infrastructure Management",
+    "Managed IT Support",
+    "IT Project Consulting",
+    "Device Management",
+    "Managed Security on Devices",
+    "Infrastructure Consulting",
+    "Other",
+  ];
 
   const handleSubmit = () => {
-    const subject = encodeURIComponent("Consultation Request - Zyberworks");
-    const body = encodeURIComponent(`Name: ${form.name}\nEmail: ${form.email}\nCompany: ${form.company}\n\nMessage:\n${form.message}`);
+    // minimal client-side validation
+    if (!form.name || !form.email || !form.service) {
+      alert("Please fill in your name, email, and select a service.");
+      return;
+    }
+
+    const subject = encodeURIComponent(
+      `${form.service} — Consultation Request - Zyberworks`
+    );
+
+    const body = encodeURIComponent(
+      `Name: ${form.name}
+Email: ${form.email}
+Company: ${form.company}
+Service: ${form.service}
+
+Message:
+${form.message}`
+    );
+
+    // mailto works fine for now; swap to API later if needed
     window.location.href = `mailto:enquiry@zyberworks.com.au?subject=${subject}&body=${body}`;
     setShowForm(false);
   };
@@ -226,35 +268,114 @@ function ContactCTA() {
   return (
     <section id="contact" className="border-t border-white/10 py-24 text-center">
       <h2 className="text-4xl font-bold">Let’s talk</h2>
-      <p className="text-slate-300 mt-3">Tell us about your environment and priorities. We’ll reply with a short plan and fixed-price options.</p>
+      <p className="text-slate-300 mt-3">
+        Tell us about your environment and priorities. We’ll reply with a short plan and fixed-price options.
+      </p>
       <div className="mt-8 flex justify-center gap-4">
-        <a href="mailto:enquiry@zyberworks.com.au" className="bg-cyan-300 text-slate-900 px-5 py-3 rounded-2xl font-semibold">Email us</a>
-        <button onClick={() => setShowForm(true)} className="border border-slate-700 px-5 py-3 rounded-2xl hover:bg-slate-800">Book a consult</button>
+        <a
+          href="mailto:enquiry@zyberworks.com.au"
+          className="bg-cyan-300 text-slate-900 px-5 py-3 rounded-2xl font-semibold"
+        >
+          Email us
+        </a>
+        <button
+          onClick={() => setShowForm(true)}
+          className="border border-slate-700 px-5 py-3 rounded-2xl hover:bg-slate-800"
+        >
+          Book a consult
+        </button>
       </div>
 
       {showForm && (
         <div className="fixed inset-0 bg-black/70 flex items-center justify-center z-50">
           <div className="bg-slate-900 border border-slate-700 rounded-2xl p-8 w-full max-w-md relative">
-            <button onClick={() => setShowForm(false)} className="absolute top-3 right-3 text-xl text-slate-400">×</button>
+            <button
+              onClick={() => setShowForm(false)}
+              className="absolute top-3 right-3 text-xl text-slate-400"
+              aria-label="Close"
+            >
+              ×
+            </button>
             <h3 className="text-2xl font-semibold text-cyan-300 mb-4">Book a Consultation</h3>
-            <form className="space-y-4 text-left">
-              {["name", "email", "company", "message"].map((field) => (
-                <div key={field}>
-                  <label className="text-sm text-slate-400 capitalize">{field}</label>
-                  {field !== "message" ? (
-                    <input type={field === "email" ? "email" : "text"} name={field} value={form[field]}
-                      onChange={(e) => setForm({ ...form, [field]: e.target.value })}
-                      className="w-full bg-slate-800 border border-slate-700 rounded-xl px-3 py-2 mt-1 text-slate-200" />
-                  ) : (
-                    <textarea name={field} rows="4" value={form[field]}
-                      onChange={(e) => setForm({ ...form, [field]: e.target.value })}
-                      className="w-full bg-slate-800 border border-slate-700 rounded-xl px-3 py-2 mt-1 text-slate-200"></textarea>
-                  )}
-                </div>
-              ))}
+
+            <form className="space-y-4 text-left" onSubmit={(e) => e.preventDefault()}>
+              {/* Name */}
+              <div>
+                <label className="text-sm text-slate-400">Name</label>
+                <input
+                  type="text"
+                  name="name"
+                  required
+                  value={form.name}
+                  onChange={(e) => setForm({ ...form, name: e.target.value })}
+                  className="w-full bg-slate-800 border border-slate-700 rounded-xl px-3 py-2 mt-1 text-slate-200"
+                />
+              </div>
+
+              {/* Email */}
+              <div>
+                <label className="text-sm text-slate-400">Email</label>
+                <input
+                  type="email"
+                  name="email"
+                  required
+                  value={form.email}
+                  onChange={(e) => setForm({ ...form, email: e.target.value })}
+                  className="w-full bg-slate-800 border border-slate-700 rounded-xl px-3 py-2 mt-1 text-slate-200"
+                />
+              </div>
+
+              {/* Company */}
+              <div>
+                <label className="text-sm text-slate-400">Company</label>
+                <input
+                  type="text"
+                  name="company"
+                  value={form.company}
+                  onChange={(e) => setForm({ ...form, company: e.target.value })}
+                  className="w-full bg-slate-800 border border-slate-700 rounded-xl px-3 py-2 mt-1 text-slate-200"
+                />
+              </div>
+
+              {/* Service (dropdown) */}
+              <div>
+                <label className="text-sm text-slate-400">Service</label>
+                <select
+                  name="service"
+                  required
+                  value={form.service}
+                  onChange={(e) => setForm({ ...form, service: e.target.value })}
+                  className="w-full bg-slate-800 border border-slate-700 rounded-xl px-3 py-2 mt-1 text-slate-200"
+                >
+                  <option value="" disabled>
+                    Select a service…
+                  </option>
+                  {services.map((s) => (
+                    <option key={s} value={s}>
+                      {s}
+                    </option>
+                  ))}
+                </select>
+              </div>
+
+              {/* Message */}
+              <div>
+                <label className="text-sm text-slate-400">Message</label>
+                <textarea
+                  name="message"
+                  rows={4}
+                  value={form.message}
+                  onChange={(e) => setForm({ ...form, message: e.target.value })}
+                  className="w-full bg-slate-800 border border-slate-700 rounded-xl px-3 py-2 mt-1 text-slate-200"
+                />
+              </div>
+
               <div className="flex justify-end">
-                <button type="button" onClick={handleSubmit}
-                  className="bg-cyan-300 text-slate-900 px-5 py-2 rounded-xl font-semibold hover:-translate-y-0.5 transition">
+                <button
+                  type="button"
+                  onClick={handleSubmit}
+                  className="bg-cyan-300 text-slate-900 px-5 py-2 rounded-xl font-semibold hover:-translate-y-0.5 transition"
+                >
                   Send
                 </button>
               </div>
