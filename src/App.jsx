@@ -43,7 +43,7 @@ export default function App() {
 
         {/* Logo with soft pulse */}
         <motion.img
-          src="/icon-transparent.png"
+          src="Public/icon-transparent.png"
           alt="Zyberworks logo"
           className="w-44 md:w-56 mb-6 drop-shadow-[0_6px_20px_rgba(34,211,238,0.45)]"
           animate={{ opacity: [0.4, 1, 0.4], scale: [0.98, 1, 0.98] }}
