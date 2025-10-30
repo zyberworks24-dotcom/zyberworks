@@ -219,7 +219,7 @@ function ContactCTA() {
   const handleSubmit = () => {
     const subject = encodeURIComponent("Consultation Request - Zyberworks");
     const body = encodeURIComponent(`Name: ${form.name}\nEmail: ${form.email}\nCompany: ${form.company}\n\nMessage:\n${form.message}`);
-    window.location.href = `mailto:info@zyberworks.com?subject=${subject}&body=${body}`;
+    window.location.href = `mailto:enquiry@zyberworks.com.au?subject=${subject}&body=${body}`;
     setShowForm(false);
   };
 
@@ -228,7 +228,7 @@ function ContactCTA() {
       <h2 className="text-4xl font-bold">Let’s talk</h2>
       <p className="text-slate-300 mt-3">Tell us about your environment and priorities. We’ll reply with a short plan and fixed-price options.</p>
       <div className="mt-8 flex justify-center gap-4">
-        <a href="mailto:info@zyberworks.com" className="bg-cyan-300 text-slate-900 px-5 py-3 rounded-2xl font-semibold">Email us</a>
+        <a href="mailto:enquiry@zyberworks.com.au" className="bg-cyan-300 text-slate-900 px-5 py-3 rounded-2xl font-semibold">Email us</a>
         <button onClick={() => setShowForm(true)} className="border border-slate-700 px-5 py-3 rounded-2xl hover:bg-slate-800">Book a consult</button>
       </div>
 
