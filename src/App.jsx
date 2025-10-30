@@ -8,14 +8,18 @@ export default function App() {
       {/* Scroll progress */}
       <ScrollProgress />
 
-      {/* ---------- Navbar ---------- */}
+      {/* ---------- Navbar (fluid widths) ---------- */}
       <header className="fixed top-0 left-0 w-full z-50 bg-slate-950/80 backdrop-blur-lg border-b border-slate-800 shadow-lg">
-        <div className="max-w-7xl mx-auto flex justify-between items-center px-8 py-4">
+        <div
+          className="mx-auto px-6 md:px-8 lg:px-12 py-4
+                     max-w-[1200px] xl:max-w-[1400px] 2xl:max-w-[1600px] 
+                     flex justify-between items-center"
+        >
           <h1 className="text-3xl font-extrabold text-cyan-300 tracking-wide drop-shadow-[0_0_10px_rgba(34,211,238,0.7)]">
             Zyberworks
           </h1>
           <nav>
-            <ul className="flex space-x-10 text-slate-300 text-lg font-medium">
+            <ul className="flex space-x-8 lg:space-x-10 text-slate-300 text-lg font-medium">
               <li><a href="#services" className="hover:text-cyan-300 transition">Services</a></li>
               <li><a href="#contact" className="hover:text-cyan-300 transition">Contact</a></li>
             </ul>
@@ -23,8 +27,8 @@ export default function App() {
         </div>
       </header>
 
-      {/* ---------- Hero (Creative) ---------- */}
-      <section className="relative h-screen flex flex-col items-center justify-center overflow-hidden pt-32">
+      {/* ---------- Hero (Creative + wider) ---------- */}
+      <section className="relative min-h-[88vh] flex flex-col items-center justify-center overflow-hidden pt-32">
         {/* Parallax glows */}
         <motion.div
           className="absolute h-[36rem] w-[36rem] rounded-full blur-3xl bg-cyan-400/20 -left-32 -top-24"
@@ -51,7 +55,10 @@ export default function App() {
           initial={{ opacity: 0, y: 24 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8 }}
-          className="text-center px-6 mt-1 text-5xl md:text-7xl font-extrabold tracking-tight"
+          className="text-center px-6 mt-1 
+                     text-5xl md:text-7xl 2xl:text-8xl 
+                     font-extrabold tracking-tight
+                     max-w-[48rem] md:max-w-[64rem] 2xl:max-w-[80rem]"
         >
           <span className="bg-gradient-to-r from-cyan-300 via-sky-200 to-indigo-300 bg-clip-text text-transparent">
             IT Services & Security Consulting
@@ -72,7 +79,9 @@ export default function App() {
           initial={{ opacity: 0, y: 16 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.15, duration: 0.8 }}
-          className="text-lg text-slate-300 max-w-2xl mx-auto mt-5 text-center px-6"
+          className="text-lg md:text-xl text-slate-300 
+                     max-w-[42rem] md:max-w-[56rem] 2xl:max-w-[64rem] 
+                     mx-auto mt-5 text-center px-6"
         >
           Secure by design. Pragmatic delivery across ISO 27001, NIST CSF 2.0, and the ASD Essential Eight.
         </motion.p>
@@ -104,8 +113,12 @@ export default function App() {
         <div className="pointer-events-none absolute inset-0 [background:radial-gradient(rgba(255,255,255,0.06)_1px,transparent_1px)] [background-size:22px_22px]" />
       </section>
 
-      {/* ---------- Services (Collapsible) ---------- */}
-      <section id="services" className="relative max-w-6xl mx-auto px-6 py-16 border-t border-slate-800">
+      {/* ---------- Services (Collapsible, fluid container) ---------- */}
+      <section
+        id="services"
+        className="relative mx-auto px-6 md:px-8 lg:px-12 py-16 border-t border-slate-800
+                   max-w-[1200px] xl:max-w-[1400px] 2xl:max-w-[1600px]"
+      >
         <h2 className="text-4xl font-bold mb-10 text-center">Our Services</h2>
 
         <CollapsibleService
@@ -247,8 +260,10 @@ function CollapsibleService({ kicker, title, body, tint, cards }) {
   return (
     <div ref={ref} className="relative mb-10 border border-slate-800 rounded-2xl overflow-hidden">
       <div className={`absolute inset-0 bg-gradient-to-b ${tint}`} />
-      <motion.div className="relative p-6 cursor-pointer flex justify-between items-center"
-        onClick={() => setOpen(!open)} style={{ opacity, y }}>
+      <motion.div
+        className="relative p-6 lg:p-8 cursor-pointer flex justify-between items-center"
+        onClick={() => setOpen(!open)} style={{ opacity, y }}
+      >
         <div>
           <p className="text-cyan-300 text-xs uppercase tracking-[0.2em]">{kicker}</p>
           <h3 className="text-2xl font-bold mt-1">{title}</h3>
@@ -258,10 +273,15 @@ function CollapsibleService({ kicker, title, body, tint, cards }) {
 
       <AnimatePresence>
         {open && (
-          <motion.div initial={{ height: 0, opacity: 0 }} animate={{ height: "auto", opacity: 1 }}
-            exit={{ height: 0, opacity: 0 }} transition={{ duration: 0.5 }} className="overflow-hidden p-6 pt-0">
+          <motion.div
+            initial={{ height: 0, opacity: 0 }}
+            animate={{ height: "auto", opacity: 1 }}
+            exit={{ height: 0, opacity: 0 }}
+            transition={{ duration: 0.5 }}
+            className="overflow-hidden p-6 pt-0"
+          >
             <p className="text-slate-300 mb-6">{body}</p>
-            <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+            <div className="grid gap-6 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4">
               {cards.map((card, i) => (
                 <motion.div
                   key={i}
@@ -427,13 +447,17 @@ ${form.message}`
   );
 }
 
-/* ---------- Footer ---------- */
+/* ---------- Footer (fluid widths) ---------- */
 function Footer() {
   return (
     <footer className="border-t border-white/10 bg-slate-950">
-      <div className="max-w-6xl mx-auto px-6 py-10 text-sm text-slate-400 flex flex-col md:flex-row justify-between items-center">
+      <div
+        className="mx-auto px-6 md:px-8 lg:px-12 py-10 text-sm text-slate-400 
+                   flex flex-col md:flex-row justify-between items-center
+                   max-w-[1200px] xl:max-w-[1400px] 2xl:max-w-[1600px]"
+      >
         <p>© {new Date().getFullYear()} Zyberworks. All rights reserved.</p>
-        <div className="flex gap-6">
+        <div className="flex gap-6 mt-4 md:mt-0">
           <a href="#services" className="hover:text-cyan-300">Services</a>
           <a href="#contact" className="hover:text-cyan-300">Contact</a>
         </div>
