@@ -25,7 +25,7 @@ export default function App() {
           animate={{ y: [0, 30, 0] }} transition={{ repeat: Infinity, duration: 8, ease: "easeInOut" }} />
         <motion.div className="absolute h-[44rem] w-[44rem] rounded-full blur-3xl bg-indigo-500/10 -right-40 bottom-[-6rem]"
           animate={{ y: [0, -30, 0] }} transition={{ repeat: Infinity, duration: 9, ease: "easeInOut" }} />
-        <motion.img src="Imgaes/icon-transparent.png" alt="Zyberworks logo"
+        <motion.img src="icon-transparent.png" alt="Zyberworks logo"
           className="w-44 md:w-56 mb-8 drop-shadow-[0_6px_20px_rgba(34,211,238,0.45)]"
           animate={{ opacity: [0.3, 1, 0.3] }} transition={{ repeat: Infinity, duration: 5, ease: "easeInOut" }} />
         <motion.div initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }}

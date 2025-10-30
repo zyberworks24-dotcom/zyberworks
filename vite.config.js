@@ -3,9 +3,6 @@ import react from '@vitejs/plugin-react'
 import tailwindcss from '@tailwindcss/vite'
 
 export default defineConfig({
-  plugins: [
-    react(),
-    tailwindcss(),
-  ],
-  base: '/zyberworks/',   // or '/' if this is <username>.github.io
+  plugins: [react(), tailwindcss()],
+  base: './', // emits ./assets/... (relative paths)
 })
