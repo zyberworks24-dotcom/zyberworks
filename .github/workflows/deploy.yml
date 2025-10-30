@@ -14,17 +14,29 @@ concurrency:
   group: "pages"
   cancel-in-progress: true
 
+env:
+  CUSTOM_DOMAIN: zyberworks.com.au   # <-- change if needed
+
 jobs:
   build:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+
       - uses: actions/setup-node@v4
         with:
           node-version: 20
           cache: npm
+
       - run: npm ci
       - run: npm run build
+
+      # Add CNAME and 404 for SPA
+      - name: Add CNAME and SPA 404
+        run: |
+          echo "$CUSTOM_DOMAIN" > dist/CNAME
+          cp dist/index.html dist/404.html
+
       - uses: actions/upload-pages-artifact@v3
         with:
           path: ./dist
